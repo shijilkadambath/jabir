@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <import type="com.bigtime.mla.data.api.Status" />
+
+        <import type="com.bigtime.mla.data.api.Resource" />
+
+        <variable
+            name="resultCount"
+            type="int" />
+
+        <variable
+            name="image"
+            type="String" />
+
+        <variable
+            name="searchResource"
+            type="Resource" />
+
+        <variable
+            name="callback"
+            type="com.bigtime.mla.ui.RetryCallback" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                app:title="@string/app_name"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_below="@+id/appbar"
+            android:layout_height="match_parent">
+            <android.support.design.widget.AppBarLayout
+                android:layout_width="match_parent"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                android:background="@color/white"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txt_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_hieght2"
+                    android:orientation="vertical"
+                    android:text="@string/date"
+                    app:fontFamily="@font/heavy"
+                    android:textColor="@color/accent"
+                    android:fontFamily="@font/heavy"
+                    android:paddingLeft="@dimen/normal_padding"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:gravity="center_vertical"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    app:layout_scrollFlags="scroll|enterAlways">
+                </android.support.v7.widget.AppCompatTextView>
+            </android.support.design.widget.AppBarLayout>
+
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_container"
+                android:layout_width="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layoutManager="LinearLayoutManager"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:paddingLeft="@dimen/normal_padding"
+                    android:paddingRight="@dimen/seperator"
+                    android:paddingBottom="@dimen/edittext_hieght"
+                    tools:listitem="@layout/item_programs"
+                    android:id="@+id/list_user" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/main_padding"
+                android:clipToPadding="false"
+                android:paddingBottom="48dp"
+                android:tint="@color/white"
+                app:srcCompat="@android:drawable/ic_input_add" />
+
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/empty_search_result}"
+            android:id="@+id/no_results_text"
+            android:layout_centerInParent="true"
+            app:visibleGone="@{searchResource.status == Status.SUCCESS &amp;&amp; resultCount == 0}"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <include
+            layout="@layout/loading_state"
+            app:resource="@{searchResource}"
+            app:callback="@{() -> callback.retry()}"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+
+    </RelativeLayout>
+
+
+</layout>

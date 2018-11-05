@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="layoutBinder"
+            type="com.bigtime.mla.ui.login.RegistrationStepOneFragment" />
+
+
+        <variable
+            name="user"
+            type="com.bigtime.mla.data.model.Program" />
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    app:title="@string/app_name"
+                    android:layout_height="?attr/actionBarSize"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_close"
+                            android:onClick="@{()->layoutBinder.onBackPressed()}"
+                            android:paddingRight="@dimen/main_padding"
+                            android:layout_height="match_parent" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/img_edit"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_edit"
+                            android:layout_toLeftOf="@+id/img_navigation"
+                            android:paddingLeft="@dimen/normal_padding"
+                            android:paddingRight="@dimen/normal_padding"
+                            android:onClick="@{()->layoutBinder.edit()}"
+                            android:layout_height="match_parent" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/img_navigation"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_navigation"
+                            android:layout_toLeftOf="@+id/img_share"
+                            android:paddingLeft="@dimen/normal_padding"
+                            android:paddingRight="@dimen/normal_padding"
+                            android:onClick="@{()->layoutBinder.navigate()}"
+                            android:layout_height="match_parent" />
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/img_share"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_share"
+                            android:layout_toLeftOf="@+id/img_delete"
+                            android:onClick="@{()->layoutBinder.share()}"
+                            android:paddingLeft="@dimen/normal_padding"
+                            android:paddingRight="@dimen/normal_padding"
+                            android:layout_height="match_parent" />
+
+                        <android.support.v7.widget.AppCompatImageView
+                            android:id="@+id/img_delete"
+                            android:layout_width="wrap_content"
+                            android:src="@drawable/ic_delete"
+                            android:layout_alignParentRight="true"
+                            android:onClick="@{()->layoutBinder.delete()}"
+                            android:paddingLeft="@dimen/normal_padding"
+                            android:paddingRight="@dimen/normal_padding"
+                            android:layout_height="match_parent" />
+
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.Toolbar>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/medium"
+                    android:text="@{user.title }"
+                    android:paddingLeft="@dimen/main_padding"
+                    android:paddingRight="@dimen/normal_padding"
+                    android:paddingTop="@dimen/main_padding"
+                    android:paddingBottom="@dimen/main_padding"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    app:fontFamily="@font/medium"
+                    tools:text="name" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/normal"
+                    android:text="@{@string/date_time(user.dateString,user.timeString)}"
+                    android:paddingLeft="@dimen/main_padding"
+                    android:paddingRight="@dimen/normal_padding"
+                    android:textColor="@color/white"
+                    android:drawablePadding="@dimen/seperator"
+                    android:drawableLeft="@drawable/ic_time"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:fontFamily="@font/normal"
+                    tools:text="name" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:onClick="@{()->layoutBinder.openSpinner()}"
+                    android:paddingTop="@dimen/seperator"
+                    android:layout_height="wrap_content">
+
+                    <Spinner
+                        android:id="@+id/sp_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="invisible"
+                        android:onItemSelected="@{layoutBinder.onItemSelected}"
+                        android:entries="@array/user_types"
+                        android:prompt="@string/status" />
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/normal"
+                        android:text="@{user.status }"
+                        android:paddingLeft="@dimen/main_padding"
+                        android:paddingRight="@dimen/normal_padding"
+                        android:paddingBottom="@dimen/main_padding"
+                        android:textColor="@color/white"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        app:fontFamily="@font/normal"
+                        tools:text="name" />
+                </FrameLayout>
+
+
+            </android.support.v7.widget.LinearLayoutCompat>
+
+                   </android.support.design.widget.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/appbar"
+            android:background="@color/white"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/normal"
+                android:text="@{user.description }"
+                android:padding="@dimen/main_padding"
+                android:textColor="@color/primary_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:fontFamily="@font/normal"
+                tools:text="name" />
+
+            <View
+                android:id="@+id/divider_loc"
+                android:layout_width="match_parent"
+                android:background="@color/divider"
+                android:layout_below="@+id/des"
+                android:layout_marginTop="@dimen/seperator"
+                android:layout_marginBottom="@dimen/normal_padding"
+                android:layout_height="1px"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title_loc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold"
+                android:text="Location"
+                android:layout_below="@+id/divider_loc"
+                android:paddingLeft="@dimen/main_padding"
+                android:paddingRight="@dimen/main_padding"
+                android:paddingTop="@dimen/seperator"
+                android:paddingBottom="@dimen/seperator"
+                android:textColor="@color/primary_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:fontFamily="@font/bold"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/normal"
+                android:text="@{user.location}"
+                android:layout_below="@+id/title_loc"
+                android:paddingLeft="@dimen/main_padding"
+                android:layout_marginLeft="@dimen/seperator"
+                android:paddingRight="@dimen/main_padding"
+                android:paddingTop="@dimen/seperator"
+                android:paddingBottom="@dimen/seperator"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                app:fontFamily="@font/normal"/>
+
+            <View
+                android:id="@+id/divider_des"
+                android:layout_width="match_parent"
+                android:background="@color/divider"
+                android:layout_below="@+id/location"
+                android:layout_marginTop="@dimen/normal_padding"
+                android:layout_marginBottom="@dimen/seperator"
+                android:layout_height="1px"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bold"
+                android:text="Contact Person"
+                android:layout_below="@+id/divider_des"
+                android:paddingLeft="@dimen/main_padding"
+                android:paddingRight="@dimen/main_padding"
+                android:paddingTop="@dimen/normal_padding"
+                android:paddingBottom="@dimen/normal_padding"
+                android:textColor="@color/primary_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:fontFamily="@font/bold"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_below="@+id/title_contact"
+                android:paddingLeft="@dimen/main_padding"
+                android:onClick="@{()->layoutBinder.callContactPerson()}"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/contact_person_call"
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_phone"
+                    android:tint="@color/accent"
+                    android:paddingLeft="@dimen/seperator"
+                    android:paddingRight="@dimen/normal_padding"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/contact_person"
+                    android:layout_toRightOf="@+id/contact_person_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/seperator"
+                    android:fontFamily="@font/normal"
+                    android:text="@{user.contact_name }"
+                    android:textColor="@color/secondary_text"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:fontFamily="@font/normal"
+                    tools:text="name" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_below="@+id/contact_person"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/seperator"
+                    android:layout_toRightOf="@+id/contact_person_call"
+                    android:fontFamily="@font/normal"
+                    android:text="@{user.contact_phone }"
+                    android:textColor="@color/secondary_text"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:fontFamily="@font/normal"
+                    tools:text="name" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

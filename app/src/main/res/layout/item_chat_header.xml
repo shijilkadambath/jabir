@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="2dp"
+        android:background="@drawable/curved_header"
+        android:fontFamily="@font/medium"
+        android:gravity="center"
+        android:text="@string/date"
+        android:minWidth="@dimen/profile_pic"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/seperator"
+        android:paddingBottom="@dimen/seperator"
+        android:paddingLeft="@dimen/normal_padding"
+        android:paddingRight="@dimen/normal_padding"
+        android:textAllCaps="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="12sp"
+        app:elevation="1dp"
+        app:fontFamily="@font/medium" />
+
+
+
+</FrameLayout>
+

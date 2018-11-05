@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <variable
+            name="user"
+            type="com.wafflecopter.multicontactpicker.ContactResult" />
+    </data>
+<LinearLayout
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="@dimen/normal_padding"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:text="@{user.displayName }"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/status"
+        tools:text="name"
+        android:textColor="@color/secondary_text"
+        android:fontFamily="@font/medium"
+        app:fontFamily="@font/medium"
+        android:paddingBottom="@dimen/normal_padding"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+    <!--android:text="@{ TextUtils.join(`, `, list) }"-->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/txt_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="name"
+        android:textColor="@color/secondary_text"
+        android:fontFamily="@font/normal"
+        app:fontFamily="@font/normal"
+        android:textSize="13sp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+
+</LinearLayout>
+
+</layout>

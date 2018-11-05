@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2017 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+
+        <variable
+            name="user"
+            type="com.bigtime.mla.data.model.Program" />
+    </data>
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:paddingRight="8dp"
+            android:paddingLeft="2dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@{user.status }"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/status"
+                tools:text="name"
+                android:paddingLeft="@dimen/seperator"
+                android:textColor="@color/accent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/normal"
+                app:fontFamily="@font/normal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/main_padding"
+                android:layout_marginEnd="@dimen/seperator"
+                android:fontFamily="@font/medium"
+                android:text="@{user.title }"
+                android:textColor="@color/primary_text"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                app:fontFamily="@font/medium"
+                app:layout_constraintEnd_toStartOf="@+id/v_divider_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="name" />
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:id="@+id/desc"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="@dimen/normal_padding"
+                android:layout_marginEnd="@dimen/seperator"
+                app:layout_constraintEnd_toStartOf="@id/v_divider_vertical"
+                app:layout_constraintTop_toBottomOf="@+id/name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/v_divider"
+                android:layout_width="0dp"
+                android:fontFamily="@font/light"
+                android:orientation="vertical"
+                app:fontFamily="@font/light"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                tools:text="name">
+
+                <TextView
+                    android:text="@{user.location}"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/location"
+                    android:layout_marginEnd="@dimen/seperator"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/light"
+                    app:fontFamily="@font/light"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    tools:text="name"/>
+                <TextView
+                    android:text="@{`Contact: `+user.contact_name+'-'+user.contact_phone}"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/seperator"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/normal"
+                    app:fontFamily="@font/normal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    tools:text="name"/>
+                <TextView
+                    android:text="@{user.dateString+' '+user.timeString}"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/seperator"
+                    android:layout_width="wrap_content"
+                    android:fontFamily="@font/normal"
+                    app:fontFamily="@font/normal"
+                    android:textColor="@color/secondary_text"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    tools:text="name"/>
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/v_divider"
+                android:layout_width="match_parent"
+                android:background="@color/divider"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="1px"/>
+
+            <View
+                android:id="@+id/v_divider_vertical"
+                android:layout_width="1px"
+                android:background="@color/divider"
+                app:layout_constraintEnd_toStartOf="@id/status"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="15dp"/>
+
+
+        </android.support.constraint.ConstraintLayout>
+</layout>
