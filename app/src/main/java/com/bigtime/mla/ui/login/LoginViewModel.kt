@@ -14,12 +14,14 @@ import com.bigtime.mla.data.api.PaginationResponse
 import com.bigtime.mla.data.api.Resource
 import com.bigtime.mla.data.model.Program
 import com.bigtime.mla.repo.UMSRepository
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class LoginViewModel
 @Inject constructor( repoRepository: UMSRepository) : ViewModel() {
 
-    private val _login = MutableLiveData<String>()
+    private val _login = MutableLiveData<Calendar>()
 
     private val _delete = MutableLiveData<Integer>()
 
@@ -33,7 +35,15 @@ class LoginViewModel
                 if (login == null) {
                     AbsentLiveData.create()
                 } else {
-                    repoRepository.loadUsers()
+
+                    val formatDate = SimpleDateFormat("yyyy-MM-dd")
+                    val start = formatDate.format(login!!.time).toString()
+
+                    login.add(Calendar.DAY_OF_MONTH,7)
+
+                    val end = formatDate.format(login!!.time).toString()
+
+                    repoRepository.loadUsers(start,end)
                 }
             }
 
@@ -63,9 +73,9 @@ class LoginViewModel
         }
     }
 
-    fun loadData() {
+    fun loadData(cal:Calendar?) {
         //if (_login.value != login) {
-            _login.value = "test"
+            _login.value = cal
         //}
     }
 

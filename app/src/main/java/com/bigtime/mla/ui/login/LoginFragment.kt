@@ -118,13 +118,13 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
 
 
-                    LoginFragmentDirections.showAddEvent(Program("",temp,"","","","","","","","","",""))
+                    LoginFragmentDirections.showAddEvent(Program("",temp,"","","",0,"","","","",""))
             )
         })
 
         mBinding.swipeContainer.setOnRefreshListener {
 
-            mViewModel.loadData()
+            mViewModel.loadData(timeCalender)
         };
 
         dateFragment = DatePickerFragment()
@@ -153,7 +153,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         })
 
 
-        mViewModel.loadData()
+        mViewModel.loadData(timeCalender)
 
         val formatDate = SimpleDateFormat("MMMM dd yyyy")
         val formattedTime = formatDate.format(timeCalender!!.time).toString()
@@ -174,6 +174,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 return false
             }
 
+            var currentDay:Int?=null
             override fun isSection(position: Int): Boolean {
 
                 //return position%3==0
@@ -181,29 +182,35 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 if (position < 0) return false
 
 
-                if (position >= adapter.getItemCount() - 1) {
+                if (position == 0) {
+
+                    val current = TimeUtils.getDateFromMilli(adapter.getProgramItem(position)!!.event_timestamp);
+                    val calendar = Calendar.getInstance()
+                    calendar.time = current
+
+                    currentDay = calendar.get(Calendar.YEAR) + calendar.get(Calendar.DAY_OF_YEAR)
+
                     return true
                 } else {
 
 
-                    val current = TimeUtils.getDateFromString(adapter.getProgramItem(position)!!.date);
-                    val previous = TimeUtils.getDateFromString(adapter.getProgramItem(position+1)!!.date);
+                    val next = TimeUtils.getDateFromMilli(adapter.getProgramItem(position)!!.event_timestamp);
 
                    // val current = mAdapter.get().getMessageItem(position)
                    // val previous = mAdapter.get().getMessageItem(position + 1)
 
-                    if (current == null || previous == null) return false
+                    if (currentDay == null || next == null) return false
 
                     val calendar = Calendar.getInstance()
-                    calendar.time = current
-
-                    val currentDay = calendar.get(Calendar.YEAR) + calendar.get(Calendar.DAY_OF_YEAR)
-
-                    calendar.time = previous
+                    calendar.time = next
                     val previousDay = calendar.get(Calendar.YEAR) + calendar.get(Calendar.DAY_OF_YEAR)
 
 
-                    return currentDay != previousDay
+                    val status:Boolean =currentDay != previousDay
+
+                    currentDay = previousDay;
+
+                    return status
                 }
 
                 /*return position == 0
@@ -219,13 +226,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             override fun getSectionHeader(position: Int): CharSequence {
 
                 //return "!"+position
-                if (position < 0) {
+                /*if (position < 0) {
                     return ""
-                }
-                var current:Date? = TimeUtils.getDateFromString(adapter.getProgramItem(position)!!.date)
+                }*/
+                val current:Date? = TimeUtils.getDateFromMilli(adapter.getProgramItem(position)!!.event_timestamp)
 
                 //val current = mAdapter.get().getMessageItem(position)
                 return if (current == null) "" else TimeUtils.formatDateChatHeader(current)
+                //return  adapter.getProgramItem(position)!!.title + position
             }
         }
     }

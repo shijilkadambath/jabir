@@ -27,17 +27,15 @@ data class Program (
         @field:SerializedName("location")
         var location:String,
 
-        @NonNull
-        @field:SerializedName("event_date")//"2018-10-24T00:00:00.000Z"
-        var date:String,
 
-        @NonNull
-        @field:SerializedName("event_time")//"14:00:00"
-        var time:String,
 
         @NonNull
         @field:SerializedName("event_type")
         var type:String,
+
+        @field:SerializedName("event_timestamp")
+        var event_timestamp:Long,
+
 
         @NonNull
         @field:SerializedName("status")
@@ -70,8 +68,7 @@ updated_at : "2018-10-20T09:00:04.000Z"*/
                 parcel.readString(),
                 parcel.readString(),
                 parcel.readString(),
-                parcel.readString(),
-                parcel.readString(),
+                parcel.readLong(),
                 parcel.readString(),
                 parcel.readString(),
                 parcel.readString(),
@@ -83,14 +80,13 @@ updated_at : "2018-10-20T09:00:04.000Z"*/
                 parcel.writeString(title)
                 parcel.writeString(description)
                 parcel.writeString(location)
-                parcel.writeString(date)
-                parcel.writeString(time)
                 parcel.writeString(type)
                 parcel.writeString(status)
                 parcel.writeString(contact_name)
                 parcel.writeString(contact_phone)
                 parcel.writeString(dateString)
                 parcel.writeString(timeString)
+                parcel.writeLong(event_timestamp)
         }
 
         override fun describeContents(): Int {

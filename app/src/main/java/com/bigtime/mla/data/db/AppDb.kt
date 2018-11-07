@@ -33,7 +33,7 @@ import com.bigtime.mla.data.model.Program
  */
 @Database(
     entities = [Program::class],
-    version = 5,
+    version = 7,
     exportSchema = false
 )
 abstract class AppDb : RoomDatabase() {

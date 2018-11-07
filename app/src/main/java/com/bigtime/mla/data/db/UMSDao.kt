@@ -47,7 +47,7 @@ abstract class UMSDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
       abstract fun insertUser( users: Program)
 
-      @Query(" SELECT * FROM Program")
+      @Query(" SELECT * FROM Program ORDER BY event_timestamp ASC")
       abstract fun loadUsers(): LiveData<List<Program>>
 
     @Query(" DELETE FROM Program WHERE id = :id")

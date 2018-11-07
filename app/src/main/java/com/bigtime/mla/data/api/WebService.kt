@@ -38,9 +38,10 @@ interface WebService {
     fun searchRepos(@Query("q") query: String): LiveData<ApiResponse<Program>>*/
 
 
-    @GET("admin/programs")
+    @GET("admin/programs/all")
 
-    fun loadUsers():LiveData<ApiResponse<BaseResponse<PaginationResponse<List<Program>>>>>
+    fun loadUsers(@Query("start_date") start: String, @Query("end_date") end: String):
+            LiveData<ApiResponse<BaseResponse<PaginationResponse<List<Program>>>>>
 
 
     @DELETE("admin/programs/{path}")
@@ -53,7 +54,7 @@ interface WebService {
     abstract fun postEvent( @Field("title") name: String,@Field("description") description: String,
                             @Field("co_name") co_name: String,@Field("co_phone") co_phone: String,
                             @Field("location") location: String,@Field("event_type") event_type: String,
-                            @Field("event_date") event_date: String,@Field("event_time") event_time: String,
+                            @Field("event_timestamp") event_date: Long,
                             @Field("status") status: String): LiveData<ApiResponse<BaseResponse<Program>>>
 
 
@@ -62,7 +63,7 @@ interface WebService {
     abstract fun update(@Path("path") id:String, @Field("title") name: String,@Field("description") description: String,
                             @Field("co_name") co_name: String,@Field("co_phone") co_phone: String,
                             @Field("location") location: String,@Field("event_type") event_type: String,
-                            @Field("event_date") event_date: String,@Field("event_time") event_time: String,
+                            @Field("event_timestamp") event_date: Long,
                             @Field("status") status: String): LiveData<ApiResponse<BaseResponse<Program>>>
 
 }

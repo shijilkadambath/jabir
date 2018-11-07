@@ -199,17 +199,17 @@ class RegistrationStepTwoFragment : BaseFragment<FragmentRegistrationStepTwoBind
 
         if (!(program!!.id.equals(Integer(0)))){
 
-            val formatTime = SimpleDateFormat("HH:mm:ss")
-            val time:Date = formatTime.parse(program!!.time)
-            val calander:Calendar= Calendar.getInstance()
-            calander.time=time
+            //val formatTime = SimpleDateFormat("HH:mm:ss")
+           // val time:Date = formatTime.parse(program!!.time)
+            //val calander:Calendar= Calendar.getInstance()
+            //calander.timeInMillis=program!!.event_timestamp
 
-            val formatDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            val date:Date = formatDate.parse(program!!.date)
-            timeCalender!!.time=date
+            //val formatDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            //val date:Date = formatDate.parse(program!!.date)
+            timeCalender!!.timeInMillis=program!!.event_timestamp
 
-            timeCalender!!.set(Calendar.HOUR_OF_DAY,calander.get(Calendar.HOUR_OF_DAY))
-            timeCalender!!.set(Calendar.MINUTE,calander.get(Calendar.MINUTE))
+            //timeCalender!!.set(Calendar.HOUR_OF_DAY,calander.get(Calendar.HOUR_OF_DAY))
+            //timeCalender!!.set(Calendar.MINUTE,calander.get(Calendar.MINUTE))
 
 
 
@@ -423,13 +423,13 @@ class RegistrationStepTwoFragment : BaseFragment<FragmentRegistrationStepTwoBind
             program!!.dateString=date
 
             //2018-10-20T09:00:04.000Z
-            val formatDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            val formattedDate = formatDate.format(timeCalender!!.time).toString()
-            program!!.date=formattedDate
+            //val formatDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+           // val formattedDate = formatDate.format(timeCalender!!.time).toString()
+           // program!!.date=formattedDate
 
-            val formatTime = SimpleDateFormat("HH:mm:ss")
-            val formattedTime = formatTime.format(timeCalender!!.time).toString()
-            program!!.time=formattedTime
+            //val formatTime = SimpleDateFormat("HH:mm:ss")
+            //val formattedTime = formatTime.format(timeCalender!!.time).toString()
+            program!!.event_timestamp=timeCalender!!.timeInMillis
 
             mViewModel.postEvent(program!!)
         }

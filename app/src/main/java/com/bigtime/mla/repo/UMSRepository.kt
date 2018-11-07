@@ -49,7 +49,7 @@ class UMSRepository @Inject constructor(
 ) {
     //ApiResponse<BaseResponse<List<Program>>>
 
-    fun loadUsers(): LiveData<Resource<BaseResponse<PaginationResponse<List<Program>>>>> {
+    fun loadUsers(start:String,end:String): LiveData<Resource<BaseResponse<PaginationResponse<List<Program>>>>> {
 
 
         return object : NetworkBoundResource<BaseResponse<PaginationResponse<List<Program>>>, BaseResponse<PaginationResponse<List<Program>>>>(appExecutors) {
@@ -85,7 +85,7 @@ class UMSRepository @Inject constructor(
                 return  result
             }
 
-            override fun createCall() = webService.loadUsers()
+            override fun createCall() = webService.loadUsers(start,end)//2018-11-10
 
 
 
@@ -142,12 +142,12 @@ class UMSRepository @Inject constructor(
             override fun createCall(): LiveData<ApiResponse<BaseResponse<Program>>> {
                 if (program!!.id.equals(Integer(0))){
                     return webService.postEvent(program.title,program.description,program.contact_name,
-                            program.contact_phone,program.location,program.type,program.date,program.time,
+                            program.contact_phone,program.location,program.type,program.event_timestamp,
                             program.status)
 
                 }else{
                     return webService.update(program.id.toString(),program.title,program.description,program.contact_name,
-                            program.contact_phone,program.location,program.type,program.date,program.time,
+                            program.contact_phone,program.location,program.type,program.event_timestamp,
                             program.status)
                 }
             }

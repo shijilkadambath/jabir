@@ -53,4 +53,12 @@ public class TimeUtils {
         // val date:Date = formatDate.parse(program!!.date)
 
     }
+    public static Date getDateFromMilli(Long date){
+
+       Calendar calendar= Calendar.getInstance();
+       calendar.setTimeInMillis(date);
+       return calendar.getTime();
+        // val date:Date = formatDate.parse(program!!.date)
+
+    }
 }
